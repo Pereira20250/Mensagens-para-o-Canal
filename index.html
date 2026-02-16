@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mensagens Diárias</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#f59e0b" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #fff7ed, #fde68a);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      display: block;
+      margin: 0 auto 24px auto;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 12px;
+      background: #f59e0b;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      animation: fadeUp 0.4s ease;
+    }
+
+    .msg {
+      white-space: pre-line;
+      line-height: 1.6;
+      font-size: 17px;
+      margin-bottom: 14px;
+    }
+
+    .copy-btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background: #111827;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mensagens Diárias ✨</h1>
+    <p class="subtitle">10 mensagens longas prontas para WhatsApp</p>
+    <button class="btn" onclick="gerar()">Gerar novas mensagens</button>
+
+    <div id="lista"></div>
+  </div>
+
+  <script>
+    const mensagensBase = [
+`Mateus 5:13 ― Vocês são o sal da terra. Mas, se o sal perder o seu sabor, como restaurá-lo? Não servirá para nada, exceto para ser jogado fora e pisado pelos homens. 14 ― Vocês são a luz do mundo. Não se pode esconder uma cidade construída sobre um monte. 15 Ninguém acende uma lâmpada e a coloca debaixo de uma vasilha. Ao contrário, coloca-a no lugar apropriado e, assim, ilumina todos os que estão na casa.
+
+Nestes versículos podemos ver que é necessário termos Cristo dentro de nós em todos o tempo, pois quando temos nossa identidade forjada entendemos para o que fomos chamados, e assim conseguimos passar para as pessoas os ensinamentos de Cristo Jesus 🔥🔥🔥`,
+
+`Mateus 5:14 ― Vocês são a luz do mundo. Uma cidade construída sobre um monte não pode ser escondida.
+
+Deus não te chamou para viver apagado, mas para brilhar. Quando Cristo governa nosso interior, nossa vida se torna um farol para quem está perdido. Permaneça firme, pois através de você muitas pessoas verão a luz de Deus. 💡🙏`,
+
+`Mateus 5:13 ― Vocês são o sal da terra.
+
+O sal foi feito para influenciar o ambiente onde está. Da mesma forma, quando carregamos a presença de Cristo, nossa vida começa a transformar lugares e pessoas ao nosso redor. Não perca a essência que Deus colocou em você. 🧂🔥`,
+
+`Mateus 5:15 ― Ninguém acende uma lâmpada e a coloca debaixo de uma vasilha.
+
+Existe uma luz dentro de você que veio de Deus. Essa luz não foi feita para ficar escondida pelo medo ou insegurança. Permita que Cristo brilhe através da sua vida hoje e alcance quem precisa. ✨🙏`,
+
+`Mateus 5:16 ― Assim brilhe a luz de vocês diante dos homens.
+
+Nossa missão diária é refletir Jesus nas pequenas atitudes. Quando vivemos de forma alinhada com Cristo, nossas obras falam mais alto que palavras. Que hoje sua vida seja uma mensagem viva do amor de Deus. ❤️🔥`,
+
+`Quando temos nossa identidade firmada em Cristo, deixamos de viver sem direção.
+
+Quem sabe quem é em Deus não anda perdido. Existe um chamado sobre a sua vida, e ele começa quando você decide permanecer em Jesus todos os dias. Caminhe com propósito. 🙌✨`,
+
+`Cristo em nós é a esperança da glória.
+
+Onde existe alguém cheio da presença de Deus, existe também transformação. Permaneça conectado com o Senhor, pois através da sua vida ambientes serão mudados e corações serão alcançados. 🔥🙏`,
+
+`Você foi chamado para ser sal e luz nesta geração.
+
+Não se conforme com uma vida comum espiritualmente. Deus te levantou para fazer diferença exatamente onde você está. Hoje é dia de viver essa identidade com ousadia. 💡🧂`,
+
+`A presença de Deus em você é o seu maior diferencial.
+
+Não é sobre aparência, mas sobre essência. Quando Cristo habita em nós, algo muda por dentro e começa a refletir por fora. Permaneça nEle e você verá os frutos. 🌿✨`,
+
+`Continue brilhando, mesmo quando ninguém estiver vendo.
+
+Deus vê a sua fidelidade no secreto. Cada passo de obediência está formando em você alguém mais parecido com Cristo. No tempo certo, a luz que está em você alcançará muitos. 🌟🙏`,
+
+,
+`João 8:12 ― Eu sou a luz do mundo.
+
+Quando seguimos a Cristo, não andamos em trevas. Mesmo em dias difíceis, a luz dEle continua nos guiando. Permaneça firme e deixe Jesus conduzir seus passos hoje. 💡🙏`,
+
+`Salmos 119:105 ― Tua palavra é lâmpada para os meus pés.
+
+A Palavra de Deus ilumina até os caminhos mais incertos. Quanto mais nos aproximamos dela, mais clareza temos para viver o propósito que o Senhor preparou. 📖✨`,
+
+`Filipenses 4:13 ― Tudo posso naquele que me fortalece.
+
+Não é sobre a sua força, mas sobre quem te sustenta. Com Cristo, você recebe capacidade para enfrentar qualquer desafio que surgir. 💪🔥`,
+
+`Josué 1:9 ― Seja forte e corajoso.
+
+Deus não te chamou para viver com medo. Ele está com você em cada passo. Hoje avance com fé, sabendo que o Senhor vai à sua frente. 🛡️🙏`,
+
+`Romanos 8:28 ― Todas as coisas cooperam para o bem.
+
+Mesmo quando não entendemos o processo, Deus continua trabalhando. Confie: aquilo que hoje parece confuso, amanhã revelará o cuidado do Senhor. ✨🙌`,
+
+`Provérbios 3:5 ― Confie no Senhor de todo o coração.
+
+Nem sempre teremos todas as respostas, mas sempre teremos um Deus fiel. Entregue seus caminhos a Ele e descanse no cuidado do Pai. ❤️🙏`,
+
+`Isaías 40:31 ― Os que esperam no Senhor renovam as forças.
+
+Quando esperamos em Deus, não ficamos parados — somos fortalecidos. Hoje receba novo ânimo e continue caminhando com fé. 🦅✨`,
+
+`2 Coríntios 5:7 ― Andamos por fé, e não pelo que vemos.
+
+A fé nos faz avançar mesmo quando os olhos naturais não entendem. Confie no que Deus prometeu e continue firme. 🙌🔥`,
+
+`Salmos 46:1 ― Deus é o nosso refúgio e fortaleza.
+
+Em tempos difíceis, corra para a presença do Senhor. Nele sempre encontramos proteção, paz e segurança. 🛡️🙏`,
+
+`Hebreus 11:1 ― A fé é a certeza daquilo que esperamos.
+
+Mesmo que ainda não tenha acontecido, continue crendo. Deus honra corações que permanecem firmes na fé. ✨🔥`,
+
+`João 15:5 ― Quem permanece em mim dá muito fruto.
+
+A chave não é esforço vazio, mas permanência em Cristo. Quanto mais perto dEle você estiver, mais sua vida produzirá frutos. 🌿🙏`,
+
+`Salmos 37:5 ― Entregue o seu caminho ao Senhor.
+
+Quando colocamos nossos planos nas mãos de Deus, Ele cuida dos detalhes que não conseguimos ver. Confie e descanse. ✨`,
+
+`Mateus 6:33 ― Busquem primeiro o Reino de Deus.
+
+Quando Deus ocupa o primeiro lugar, o restante se alinha. Priorize o céu hoje e veja o cuidado do Senhor se manifestar. 👑🙏`,
+
+`1 Pedro 5:7 ― Lancem sobre Ele toda a ansiedade.
+
+Você não foi criado para carregar tudo sozinho. Entregue suas preocupações ao Senhor e receba a paz que vem dEle. 🕊️✨`,
+
+`Salmos 23:1 ― O Senhor é o meu pastor.
+
+Quem é guiado por Deus nunca está desamparado. Mesmo nos vales, a presença do Pastor continua fiel. 🐑🙏`,
+
+`Romanos 12:2 ― Não se amoldem ao padrão deste mundo.
+
+Deus te chamou para viver de forma diferente. Permita que Ele transforme sua mente e renove sua maneira de viver. 🔥✨`,
+
+`Efésios 2:10 ― Somos criação de Deus.
+
+Você não é um acidente. Existe um propósito específico de Deus sobre a sua vida. Viva hoje consciente disso. 🙌`,
+
+`Salmos 34:8 ― Provem e vejam como o Senhor é bom.
+
+Quanto mais você se aproxima de Deus, mais você experimenta Sua bondade. Vale a pena confiar nEle. ❤️✨`,
+
+`Tiago 1:5 ― Se alguém tem falta de sabedoria, peça a Deus.
+
+O Senhor não nega direção a quem busca. Hoje, antes de decidir, fale com Deus. Ele quer te orientar. 🙏🧭`,
+
+`Apocalipse 3:20 ― Eis que estou à porta e bato.
+
+Jesus continua chamando corações todos os dias. Abra a porta da sua vida e permita que Ele transforme tudo. 🚪✨`
+    ];
+
+    function embaralhar(array) {
+      return [...array].sort(() => Math.random() - 0.5);
+    }
+
+    function gerar() {
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+
+      const selecionadas = embaralhar(mensagensBase).slice(0, 10);
+
+      selecionadas.forEach(msg => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const texto = document.createElement("div");
+        texto.className = "msg";
+        texto.textContent = msg;
+
+        const btn = document.createElement("button");
+        btn.className = "copy-btn";
+        btn.textContent = "Copiar para WhatsApp";
+        btn.onclick = () => {
+          navigator.clipboard.writeText(msg);
+          alert("Mensagem copiada! ✅");
+        };
+
+        card.appendChild(texto);
+        card.appendChild(btn);
+        lista.appendChild(card);
+      });
+    }
+
+    gerar();
+
+    // Service Worker simples (PWA)
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
+  </script>
+</body>
+</html>
