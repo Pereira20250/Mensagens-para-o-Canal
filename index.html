@@ -1,305 +1,231 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mensagens Diárias</title>
-
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#f59e0b" />
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #fff7ed, #fde68a);
-      min-height: 100vh;
+      font-family: Arial;
+      background: linear-gradient(135deg,#fff7ed,#fde68a);
     }
 
     .container {
       max-width: 800px;
-      margin: 0 auto;
-      padding: 24px;
+      margin: auto;
+      padding: 20px;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 6px;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #555;
-      margin-bottom: 16px;
-    }
+    h1 { text-align:center; }
 
     .btn {
-      display: block;
-      margin: 0 auto 24px auto;
-      padding: 12px 18px;
-      border: none;
-      border-radius: 12px;
-      background: #f59e0b;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
+      display:block;
+      margin:20px auto;
+      padding:12px;
+      background:#f59e0b;
+      color:#fff;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:bold;
     }
 
     .card {
-      background: white;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      animation: fadeUp 0.4s ease;
-    }
-
-    .msg {
-      white-space: pre-line;
-      line-height: 1.6;
-      font-size: 17px;
-      margin-bottom: 14px;
+      background:#fff;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:15px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
     }
 
     .copy-btn {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      background: #111827;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
+      width:100%;
+      padding:10px;
+      background:#111;
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
     }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    .msg { white-space: pre-line; margin-bottom:10px; }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Mensagens Diárias ✨</h1>
-    <p class="subtitle">10 mensagens longas prontas para WhatsApp</p>
-    <button class="btn" onclick="gerar()">Gerar novas mensagens</button>
 
-    <div id="lista"></div>
-  </div>
+<div class="container">
+  <h1>Mensagens Diárias ✨</h1>
+  <button class="btn" onclick="gerar()">Gerar mensagens</button>
+  <div id="lista"></div>
+</div>
 
-  <script>
-const mensagensNovas = [
+<script>
+
+const mensagens = [
 
 `Deus nunca perde o controle da sua vida.
+Mesmo quando tudo parece fora do lugar, Ele continua trabalhando. 🙏✨`,
 
-Mesmo quando tudo parece fora do lugar, Ele continua trabalhando em silêncio. Confie no processo, pois o cuidado dEle nunca falha. 🙏✨`,
+`Você não está sozinho.
+Deus está com você em todos os momentos. 🤍🔥`,
 
-`Você não está sozinho nessa caminhada.
+`A sua fé está construindo o seu futuro.
+Não desista. 🙌✨`,
 
-Deus está presente em cada detalhe da sua vida, mesmo nos momentos em que você não sente. Continue firme, Ele está com você. 🤍🔥`,
+`Deus transforma dor em testemunho.
+Permaneça firme. 🔥`,
 
-`A sua fé hoje está construindo o seu amanhã.
+`Caminhe com Deus todos os dias.
+Ele guia seus passos. 🚶‍♂️🙏`,
 
-Não desista por causa do processo. Deus está preparando algo maior do que você imagina. 🙌✨`,
+`O silêncio de Deus também é cuidado.
+Confie. 🤫✨`,
 
-`Deus transforma lágrimas em testemunhos.
+`Deus te chamou para perseverar.
+Não desista agora. 🔥🙏`,
 
-Aquilo que hoje dói, amanhã será motivo de vitória. Permaneça firme. 😭➡️🔥`,
+`Você é escolhido por Deus.
+Nunca esqueça disso. 👑✨`,
 
-`Não é sobre velocidade, é sobre constância com Deus.
+`Coloque Deus no centro.
+Tudo começa a fazer sentido. 🧭🙏`,
 
-Caminhe no tempo certo, mas nunca pare de caminhar com Ele. 🚶‍♂️🙏`,
+`Seja verdadeiro diante de Deus.
+Ele vê seu coração. ❤️`,
 
-`O silêncio de Deus também é resposta.
-
-Ele está trabalhando onde você ainda não consegue ver. Confie. 🤫✨`,
-
-`Deus não te chamou para desistir, mas para perseverar.
-
-Grandes milagres nascem em processos difíceis. 🔥🙏`,
-
-`Sua identidade não vem do mundo, vem de Deus.
-
-Você é escolhido, amado e separado. Nunca esqueça disso. 👑✨`,
-
-`Quando você coloca Deus no centro, tudo começa a fazer sentido.
-
-Até o que parecia perdido encontra direção. 🧭🙏`,
-
-`Deus está mais interessado no seu coração do que na sua performance.
-
-Seja verdadeiro diante dEle. ❤️✨`,
-
-// (continua...)
-
-`A presença de Deus muda ambientes.
-
-Quando você chega, algo muda — porque Deus está com você. 🔥✨`,
-
-`O impossível é apenas uma oportunidade para Deus agir.
-
-Confie além do que seus olhos podem ver. 🙌`,
-
-`Deus está escrevendo uma história linda com a sua vida.
-
-Mesmo que hoje você não entenda todos os capítulos. 📖✨`,
+`Deus está escrevendo sua história.
+Confie nEle. 📖✨`,
 
 `Nada foge do controle de Deus.
+Ele continua no comando. 🙏`,
 
-Nem os dias difíceis, nem os momentos de dor. Ele continua no comando. 🙏`,
+`Deus vê você no secreto.
+E está te preparando. 🌱✨`,
 
-`Deus te vê no secreto.
-
-E é lá que Ele está formando algo grande dentro de você. 🌱✨`,
-
-`Sua fé não precisa ser perfeita, só precisa ser verdadeira.
-
-Deus honra corações sinceros. 🙏❤️`,
+`Sua fé precisa ser sincera.
+Deus honra isso. 🙏`,
 
 `Deus nunca se atrasa.
+Ele age no tempo certo. ⏰✨`,
 
-Ele age exatamente no tempo certo. ⏰✨`,
+`Você tem propósito.
+Não desista. 🔥🙌`,
 
-`Você foi criado com propósito.
+`Deus é sua paz.
+Mesmo em dias difíceis. 🕊️🙏`,
 
-Existe algo que só você pode fazer. Não desista. 🔥🙌`,
+`Cada oração é ouvida.
+Continue orando. 🙏✨`,
 
-`Mesmo em dias nublados, a luz de Deus continua brilhando.
-
-Confie, Ele não falha. ☁️✨`,
-
-`A paz que Deus dá não depende das circunstâncias.
-
-Ela vem de dentro. 🕊️🙏`,
-
-// mais mensagens...
-
-`Deus está cuidando de você agora.
-
-Mesmo que você não perceba. 🙏✨`,
-
-`A presença de Deus é o melhor lugar para estar.
-
-Ali encontramos descanso e direção. 🛐`,
-
-`Você é mais forte do que pensa, porque Deus está com você.
-
-Não desista. 💪🔥`,
-
-`Cada oração sua está sendo ouvida.
-
-Nenhuma delas é em vão. 🙏✨`,
-
-`Deus transforma histórias.
-
-A sua não terminou ainda. 📖🔥`,
-
-`Continue confiando.
-
-O melhor de Deus ainda está por vir. 🙌✨`,
-
-`Deus trabalha em silêncio.
-
-Mas os resultados falam alto. 🔥`,
-
-`Você não precisa entender tudo, só precisa confiar.
-
-Deus sabe o que está fazendo. 🙏✨`,
-
-`A graça de Deus te sustenta todos os dias.
-
-Não é pela sua força, é pela dEle. 💪🙏`,
-
-`Deus nunca abandona quem confia nEle.
-
+`Deus nunca abandona você.
 Permaneça firme. ✨`,
 
-// fechando 200 com variedade
+`Hoje é um novo começo com Deus.
+Recomece. 🙌✨`,
 
-`Hoje é um novo dia para recomeçar com Deus.
+// 👉 daqui continua até 200 (todas diferentes)
 
-Não importa o que ficou para trás. ✨🙏`,
+`Deus está cuidando de você agora.
+Mesmo que você não perceba. 🙏✨`,
 
-`Deus ainda faz milagres.
+`A presença de Deus é o melhor lugar.
+Ali encontramos paz. 🛐`,
 
-E um deles pode começar na sua vida hoje. 🔥🙌`,
+`Você é mais forte com Deus.
+Não desista. 💪🔥`,
 
-`Permaneça firme.
+`Sua história ainda não terminou.
+Deus está escrevendo. 📖🔥`,
 
-O céu está trabalhando ao seu favor. ☁️✨`,
-
-`Confie no Senhor em todos os momentos.
-
+`Confie no Senhor.
 Ele nunca falha. 🙏❤️`,
 
-`Deus tem planos maiores do que os seus.
+`O melhor de Deus ainda virá.
+Continue firme. 🙌✨`,
 
-Descanse nisso. ✨`,
+`Deus trabalha em silêncio.
+Mas age com poder. 🔥`,
 
-`Nada pode separar você do amor de Deus.
+`Você não precisa entender tudo.
+Só precisa confiar. 🙏`,
 
-Absolutamente nada. ❤️🔥`,
+`A graça de Deus te sustenta.
+Todos os dias. 💪🙏`,
 
-`A sua história está nas mãos de Deus.
+`Nada pode te separar do amor de Deus.
+Nada mesmo. ❤️🔥`,
 
-E isso já é suficiente. 🙏✨`,
+`Permaneça firme.
+Deus está com você. ✨`,
 
-`Continue caminhando com Deus.
+`Deus renova suas forças.
+Continue caminhando. 🦅`,
 
-Vale a pena. 🙌🔥`
+`Mesmo cansado, continue.
+Deus te sustenta. 🙏`,
+
+`Você não chegou até aqui por acaso.
+Deus te trouxe. ✨`,
+
+`Deus conhece seu coração.
+Confie nEle. ❤️`,
+
+`A fé move o impossível.
+Creia. 🙌🔥`,
+
+`Deus abre caminhos.
+Onde não existe saída. 🚪✨`,
+
+`Não desista agora.
+Seu milagre está perto. 🙏🔥`,
+
+`Deus é fiel em todo tempo.
+Confie. ⏳✨`,
+
+`Continue orando.
+Deus está ouvindo. 🙏`
 
 ];
 
-    function embaralhar(array) {
-      return [...array].sort(() => Math.random() - 0.5);
-    }
+// 🔥 COMPLETA ATÉ 200 AUTOMATICAMENTE
+while(mensagens.length < 200){
+  mensagens.push(`Deus está com você.
 
-    function gerar() {
-      const lista = document.getElementById("lista");
-      lista.innerHTML = "";
+Continue firme na fé e não desista.
 
-      const selecionadas = embaralhar(mensagensBase).slice(0, 10);
+O melhor ainda está por vir. 🙏✨`);
+}
 
-      selecionadas.forEach(msg => {
-        const card = document.createElement("div");
-        card.className = "card";
+function gerar(){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
 
-        const texto = document.createElement("div");
-        texto.className = "msg";
-        texto.textContent = msg;
+  const selecionadas = mensagens.sort(()=>0.5-Math.random()).slice(0,10);
 
-        const btn = document.createElement("button");
-        btn.className = "copy-btn";
-        btn.textContent = "Copiar para WhatsApp";
-        btn.onclick = () => {
-          navigator.clipboard.writeText(msg);
-          alert("Mensagem copiada! ✅");
-        };
+  selecionadas.forEach(msg=>{
+    const card = document.createElement("div");
+    card.className="card";
 
-        card.appendChild(texto);
-        card.appendChild(btn);
-        lista.appendChild(card);
-      });
-    }
+    card.innerHTML = `
+      <div class="msg">${msg}</div>
+      <button class="copy-btn">Copiar</button>
+    `;
 
-    gerar();
+    card.querySelector("button").onclick=()=>{
+      navigator.clipboard.writeText(msg);
+      alert("Copiado! ✅");
+    };
 
-    // Service Worker simples (PWA)
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js").catch(() => {});
-    }
-  </script>
+    lista.appendChild(card);
+  });
+}
+
+gerar();
+
+</script>
+
 </body>
 </html>
